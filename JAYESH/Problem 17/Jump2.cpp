@@ -1,25 +1,17 @@
-// Input: v = [2,3,1,1,4]
-// Output: 2
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
-
-int main(){
-    vector<int>v = {2,3,1,1,4};
-    int count = 0;
-    int i = 0;
-    while(i<v.size()){
-        int j = i + v[i];
-        if(j>=v.size()){
-            break;
+//Problem link = https://leetcode.com/problems/jump-game-ii/
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int jump = 0;
+        int position = 0;
+        int destination = 0;
+        for(int i = 0; i<nums.size()-1; i++){
+            destination = max(destination,nums[i]+i);
+            if(position==i){
+                position = destination;
+                jump++;
+            }
         }
-        else{
-            count++;
-        }
-        i = j;
+        return jump;
     }
-
-    cout<<count;
-    return 0;
-}
+};
