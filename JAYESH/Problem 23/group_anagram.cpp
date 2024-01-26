@@ -1,25 +1,19 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-int main(){
-   vector<string> str = {"eat", "tea", "tan", "ate", "nat", "bat"};
-//    sort(str[0].begin(), str[0].end());
-//    cout<<str[0]<<endl;
- vector<vector<string>>ans;
-  for(int i = 0; i<str.size(); i++){
-     sort(str[i].begin(), str[i].end());
-  }
-  for(int i = 0; i<str.size()-1; i++){
-    for(int j = i+1; j<str.size(); j++){
-        if(str[i]==str[j]){
-            vector<string> anagramPair = {str[i], str[j]};
-            ans.push_back(anagramPair);
+//Problem link = https://leetcode.com/problems/group-anagrams/
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> mp;
+        
+        for(int i = 0; i < strs.size(); i++) {
+            string word = strs[i];
+            sort(word.begin(), word.end());
+            mp[word].push_back(strs[i]);
         }
+        
+        vector<vector<string>> ans;
+        for(auto it = mp.begin(); it != mp.end(); ++it) {
+            ans.push_back(it->second);
+        }
+        return ans;
     }
-  }
-  for (int i = 0; i < ans.size(); i++) {
-    cout << ans[i][0] << " " << ans[i][1] << endl;
-}
-
-    return 0;
-}
+};
